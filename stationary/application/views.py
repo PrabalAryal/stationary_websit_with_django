@@ -11,7 +11,11 @@ def home(request):
 
 
 def items(request):
-    return render(request, "items.html")
+    client = pymongo.MongoClient("mongodb://localhost:27017/")
+    db = client["stationary"]
+    collection = db["collection1"]
+    sold_items = collection.find()
+    return render(request, "items.html", {"sold_items": sold_items})
 
 
 def buy(request):
