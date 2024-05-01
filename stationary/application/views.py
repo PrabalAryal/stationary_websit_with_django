@@ -3,6 +3,7 @@ import pymongo
 from pymongo import MongoClient
 from .models import stationaryitems
 from django.http import HttpResponseRedirect
+from .models import register_info
 
 
 # Create your views here.
@@ -37,6 +38,17 @@ def sell(request):
 
 def about(request):
     return render(request, "about.html")
+
+
+def signin(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        register_info.register(username, email, password)
+        return HttpResponseRedirect("http://127.0.0.1:8000/")
+
+    return render(request, "signup.html")
 
 
 # Create your views here.

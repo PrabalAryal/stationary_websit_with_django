@@ -159,7 +159,11 @@
         .footer__nav {
           flex: 2 0px;
         }
-      }
+        .my-btn {
+          margin-right: 10px;}
+       {% comment%} this is for the signin page {% endcomment%}
+
+      
     </style>
   </head>
   <body>
@@ -220,18 +224,29 @@
                 >Items</a
               >
             </li>
+            
+            </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
+
+          {% comment %}
+            <form class="d-flex" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+          {% endcomment %}
+          <button class="btn btn-outline-light my-btn" type="submit">
+          
+              <a class="nav-link active" aria-current="page" href="/signin"> log_in </a></button>
+
+            <button class="btn btn-outline-light my-btn" >
+          
+              <a class="nav-link active" aria-current="page"  href="/signin"> sign_in</a>
+              
             </button>
-          </form>
+          
         </div>
       </div>
     </nav>

@@ -49,12 +49,16 @@ class productsstock(models.Model):
 
 class register_info(models.Model):
     username = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
     password = models.CharField(max_length=100)
 
     @staticmethod
-    def register(username, password):
+    def register(username, email, password):
+        print(f"username: {username}, email: {email}, password: {password}")
         client = pymongo.MongoClient("mongodb://localhost:27017/")
         db = client["stationary"]
-        collection = db["collection4"]
-        collection.insert_one({"username": username, "password": password})
+        collection_login = db["collection4"]
+        collection_login.insert_one(
+            {"username": username, "email": email, "password": password}
+        )
         client.close()
