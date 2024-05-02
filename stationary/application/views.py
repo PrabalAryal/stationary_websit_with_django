@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from .models import register_info
 from django.http import HttpResponse
 from django.contrib.auth import authenticate
+import base64
 
 client = pymongo.MongoClient("mongodb://localhost:27017/")
 db = client["stationary"]
@@ -66,12 +67,12 @@ def login(request):
 
         user = collection.find_one({"email": email})
 
-        if user and bcrypt.checkpw(
-            password.encode("utf-8"), user["password"].encode("utf-8")
-        ):
-            return HttpResponseRedirect("http://127.0.0.1:8000/")
-        else:
-            return HttpResponse("wrong credentials")
+        if user:
+            hashed_password = base64.b64decode(user["password"])
+            if bcrypt.checkpw(password.encode("utf-8"), hashed_password):
+                return HttpResponseRedirect("http://127.0.0.1:8000/")
+            else:
+                return HttpResponse("wrong credentials")
 
     return render(request, "login.html")
 
