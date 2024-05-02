@@ -1,9 +1,15 @@
 from django.shortcuts import render
 import pymongo
+import bcrypt
 from pymongo import MongoClient
 from .models import stationaryitems
 from django.http import HttpResponseRedirect
 from .models import register_info
+from django.http import HttpResponse
+from django.contrib.auth import authenticate
+
+client = pymongo.MongoClient("mongodb://localhost:27017/")
+db = client["stationary"]
 
 
 # Create your views here.
@@ -49,6 +55,25 @@ def signin(request):
         return HttpResponseRedirect("http://127.0.0.1:8000/")
 
     return render(request, "signup.html")
+
+
+def login(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        collection = db["collection4"]
+
+        user = collection.find_one({"email": email})
+
+        if user and bcrypt.checkpw(
+            password.encode("utf-8"), user["password"].encode("utf-8")
+        ):
+            return HttpResponseRedirect("http://127.0.0.1:8000/")
+        else:
+            return HttpResponse("wrong credentials")
+
+    return render(request, "login.html")
 
 
 # Create your views here.

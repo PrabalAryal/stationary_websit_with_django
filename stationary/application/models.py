@@ -1,5 +1,7 @@
 from django.db import models
 import pymongo
+import base64
+import bcrypt
 from pymongo import MongoClient
 
 
@@ -58,7 +60,9 @@ class register_info(models.Model):
         client = pymongo.MongoClient("mongodb://localhost:27017/")
         db = client["stationary"]
         collection_login = db["collection4"]
+        hashedPassword = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
+        pword = base64.b64encode(hashedPassword).decode("utf-8")
         collection_login.insert_one(
-            {"username": username, "email": email, "password": password}
+            {"username": username, "email": email, "password": pword}
         )
         client.close()
