@@ -237,8 +237,14 @@
                 aria-label="Search"
               />
           {% endcomment %}
-          <button class="btn btn-outline-light my-btn" type="submit">
-          
+              {%if id %}
+              <button class="btn btn-outline-light my-btn">
+                <a class="nav-link active" aria-current="page" href="#"> profile </a></button>
+                </button>
+          <button class="btn btn-outline-light my-btn">
+            <a class="nav-link active" aria-current="page" href="#"> log_out </a></button>
+          {%else%}
+          <button class="btn btn-outline-light my-btn">
               <a class="nav-link active" aria-current="page" href="/login"> log_in </a></button>
 
             <button class="btn btn-outline-light my-btn" >
@@ -246,6 +252,7 @@
               <a class="nav-link active" aria-current="page"  href="/signin"> sign_in</a>
               
             </button>
+            {%endif%}
           
         </div>
       </div>

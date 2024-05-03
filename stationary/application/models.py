@@ -61,7 +61,9 @@ class register_info(models.Model):
         db = client["stationary"]
         collection_login = db["collection4"]
         hashedPassword = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
-        pword = base64.b64encode(hashedPassword).decode("utf-8")
+        pword = base64.b64encode(hashedPassword).decode(
+            "utf-8"
+        )  # this is done because mongodb cannot store bytes object directly so we convert the hashed password  to base64 string
         collection_login.insert_one(
             {"username": username, "email": email, "password": pword}
         )
