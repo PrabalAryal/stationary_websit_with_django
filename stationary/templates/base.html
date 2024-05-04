@@ -237,22 +237,21 @@
                 aria-label="Search"
               />
           {% endcomment %}
-              {%if id %}
-              <button class="btn btn-outline-light my-btn">
-                <a class="nav-link active" aria-current="page" href="#"> profile </a></button>
-                </button>
-          <button class="btn btn-outline-light my-btn">
-            <a class="nav-link active" aria-current="page" href="#"> log_out </a></button>
-          {%else%}
-          <button class="btn btn-outline-light my-btn">
-              <a class="nav-link active" aria-current="page" href="/login"> log_in </a></button>
-
-            <button class="btn btn-outline-light my-btn" >
-          
-              <a class="nav-link active" aria-current="page"  href="/signin"> sign_in</a>
-              
-            </button>
-            {%endif%}
+          {% if request.session.user_id %}
+    <button class="btn btn-outline-light my-btn">
+        <a class="nav-link active" aria-current="page" href="#"> Profile </a>
+    </button>
+    <button class="btn btn-outline-light my-btn">
+        <a class="nav-link active" aria-current="page" href="/logout"> Log out </a>
+    </button>
+{% else %}
+    <button class="btn btn-outline-light my-btn">
+        <a class="nav-link active" aria-current="page" href="/login"> Log in </a>
+    </button>
+    <button class="btn btn-outline-light my-btn">
+        <a class="nav-link active" aria-current="page" href="/signin"> Sign in </a>
+    </button>
+{% endif %}
           
         </div>
       </div>

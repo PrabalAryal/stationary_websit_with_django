@@ -69,19 +69,25 @@ def login(request):
 
         if user:
             hashed_password = base64.b64decode(user["password"])
+            # the bcrypt.checkpw function expects both arguments to be bytes objects.#The first argument is the plaintext password entered by the user, which is a string. The encode method #is used to convert this string into a bytes object.#The second argument is the hashed password retrieved from the database. If you're storing the hashed #password as a base64-encoded string, you need to use base64.b64decode to decode it into a bytes object.So, even though both the plaintext password and the hashed password are originally strings, they need #to be converted to bytes objects before they can be passed to bcrypt.checkpw. This is why you see both #encode and base64.b64decode being used.
             if bcrypt.checkpw(password.encode("utf-8"), hashed_password):
-                # the bcrypt.checkpw function expects both arguments to be bytes objects.#The first argument is the plaintext password entered by the user, which is a string. The encode method #is used to convert this string into a bytes object.#The second argument is the hashed password retrieved from the database. If you're storing the hashed #password as a base64-encoded string, you need to use base64.b64decode to decode it into a bytes object.So, even though both the plaintext password and the hashed password are originally strings, they need #to be converted to bytes objects before they can be passed to bcrypt.checkpw. This is why you see both #encode and base64.b64decode being used.
                 request.session["user_id"] = str(user["_id"])
                 return HttpResponseRedirect("http://127.0.0.1:8000/")
             else:
-                return HttpResponse("wrong credentials")
-
-    return render(request, "login.html")
+                return HttpResponseRedirect(
+                    "http://127.0.0.1:8000/login?error=wrong_credentials"
+                )
+        else:
+            return HttpResponseRedirect(
+                "http://127.0.0.1:8000/login?error=user_not_found"
+            )
+    else:
+        return render(request, "login.html")
 
 
 def logout(request):
-    request.session.flush()  # flush is used for more security than clear() method
-    return HttpResponseRedirect("http://127.0.0.1:8000/")
+    request.session.flush()  # flush is used for more security than clear() method as it clears the entire session data of the user once they logout and makes new seesion id for the user for next login
+    return HttpResponseRedirect("/")
 
 
 # Create your views here.
