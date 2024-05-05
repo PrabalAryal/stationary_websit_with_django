@@ -9,7 +9,9 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate
 import base64
 
-client = pymongo.MongoClient("mongodb://localhost:27017/")
+client = pymongo.MongoClient(
+    "mongodb+srv://lohiti:testdatabase@iq-question.zm5yyij.mongodb.net/"
+)
 db = client["stationary"]
 
 
@@ -38,7 +40,7 @@ def sell(request):
 
         stationaryitems.product(product_name, price, quantity)
 
-        return HttpResponseRedirect("/success/")
+        return HttpResponseRedirect("/")
 
     return render(request, "sell.html")
 
@@ -53,7 +55,7 @@ def signin(request):
         email = request.POST.get("email")
         password = request.POST.get("password")
         register_info.register(username, email, password)
-        return HttpResponseRedirect("http://127.0.0.1:8000/")
+        return HttpResponseRedirect("/")
 
     return render(request, "signup.html")
 
@@ -72,15 +74,11 @@ def login(request):
             # the bcrypt.checkpw function expects both arguments to be bytes objects.#The first argument is the plaintext password entered by the user, which is a string. The encode method #is used to convert this string into a bytes object.#The second argument is the hashed password retrieved from the database. If you're storing the hashed #password as a base64-encoded string, you need to use base64.b64decode to decode it into a bytes object.So, even though both the plaintext password and the hashed password are originally strings, they need #to be converted to bytes objects before they can be passed to bcrypt.checkpw. This is why you see both #encode and base64.b64decode being used.
             if bcrypt.checkpw(password.encode("utf-8"), hashed_password):
                 request.session["user_id"] = str(user["_id"])
-                return HttpResponseRedirect("http://127.0.0.1:8000/")
+                return HttpResponseRedirect("/")
             else:
-                return HttpResponseRedirect(
-                    "http://127.0.0.1:8000/login?error=wrong_credentials"
-                )
+                return HttpResponseRedirect("/login?error=wrong_credentials")
         else:
-            return HttpResponseRedirect(
-                "http://127.0.0.1:8000/login?error=user_not_found"
-            )
+            return HttpResponseRedirect("/login?error=user_not_found")
     else:
         return render(request, "login.html")
 

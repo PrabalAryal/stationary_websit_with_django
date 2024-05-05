@@ -1,6 +1,18 @@
 {%extends "base.html"%} {%block body%}
-<h1 style="center">Items sold</h1>
-<div class="container">
+<h1 style="center">Items Available</h1>
+<div
+  style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+  "
+>
+  <h2 style="text-align: center">
+    currently we do not have any items available in our stock
+  </h2>
+</div>
+  {% comment%}
   <table class="table table-striped">
     <thead>
       <tr>
@@ -19,5 +31,5 @@
       {%endfor%}
     </tbody>
   </table>
-  {%endblock body%}
+  {%endcomment%} {%endblock body%}
 </div>

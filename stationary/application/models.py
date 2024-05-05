@@ -13,7 +13,9 @@ class stationaryitems(models.Model):
 
     @staticmethod
     def product(product_name, price, quantity):
-        client = pymongo.MongoClient("mongodb://localhost:27017/")
+        client = pymongo.MongoClient(
+            "mongodb+srv://lohiti:testdatabase@iq-question.zm5yyij.mongodb.net/"
+        )
         db = client["stationary"]
         collection = db["collection1"]
         collection.insert_one(
@@ -28,7 +30,9 @@ class productsstock(models.Model):
 
     @staticmethod
     def product(product_name, quantity):
-        client = pymongo.MongoClient("mongodb://localhost:27017/")
+        client = pymongo.MongoClient(
+            "mongodb+srv://lohiti:testdatabase@iq-question.zm5yyij.mongodb.net/"
+        )
         db = client["stationary"]
         collection = db["collection2"]
         collection.insert_one({"product_name": product_name, "quantity": quantity})
@@ -57,7 +61,9 @@ class register_info(models.Model):
     @staticmethod
     def register(username, email, password):
         print(f"username: {username}, email: {email}, password: {password}")
-        client = pymongo.MongoClient("mongodb://localhost:27017/")
+        client = pymongo.MongoClient(
+            "mongodb+srv://lohiti:testdatabase@iq-question.zm5yyij.mongodb.net/"
+        )
         db = client["stationary"]
         collection_login = db["collection4"]
         hashedPassword = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())

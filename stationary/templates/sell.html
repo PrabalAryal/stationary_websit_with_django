@@ -1,8 +1,11 @@
 {% extends "base.html" %} {% block body %}
 <div class="container">
   <h1 class="footer__logo" style="text-align: center">
-    Sell Stationary Products
+    . Sell Stationary Products
   </h1>
+  <h4 class="footer__logo" style="text-align: center">
+    "do you have any products we could buy ! if yes fill the form below"
+  </h4>
   <form method="POST" action="/sell/">
     {% csrf_token %}
     <div class="form-group">
