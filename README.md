@@ -1,6 +1,6 @@
 # Stationary Items Selling Website
 
-This is an example project on a Stationary Items selling website. Users can select from a wide variety of stationary items, sell items, and buy new items, etc.
+This is an example project on a Stationary Items selling website. Users can select from a wide variety of stationary items, sell items, and buy new items all from the comfort of their own home.Also, the details of the user they provide while performing the transactions are properly secured.
 
 The tech stack used for this project includes Python (Django) and MongoDB for the database.
 
