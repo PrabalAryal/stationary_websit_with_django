@@ -6,4 +6,4 @@ The tech stack used for this project includes Python (Django) and MongoDB for th
 
 ## Project Status
 
-As of now, the work on this project has been completed. The item selling section is left untouched as I do not possess any stocks or items which can be displayed. This project is concluded for now and may be revisited in the future for further enhancements or functionality additions.
+As of now, the work on this project has been completed. The items selling section is left untouched as I do not possess any stocks or items which can be displayed. This project is concluded for now and may be revisited in the future for further enhancements or any other functionality additions.
