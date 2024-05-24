@@ -164,4 +164,4 @@ websocket-client==1.6.1
 websockets==11.0.3
 Werkzeug==2.3.6
 widgetsnbextension==4.0.8
-wrapt==1.15.0.0
+wrapt==1.15.0
